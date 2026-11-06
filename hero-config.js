@@ -7,6 +7,6 @@ window.TL_HERO = {
     jumpAt: [5],
     hopAt: -1,
     speed: 1.5,
-    camera: { position: [0.5, 4.8, 13.4], target: [0, 0.3, 0], fov: 32 }
+    camera: { position: [0.4, 4.1, 9.6], target: [0, 0.2, 0], fov: 32 }
   }
 };

@@ -227,9 +227,9 @@ textarea.tl-input { height: auto; min-height: 120px; padding: var(--space-3) var
 .tl-hero__scene.has-actor .tl-hero__poster { opacity: 0; }
 .tl-hero__scene.is-static .tl-hero__poster { opacity: 1; }
 .tl-hero__shade { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(90deg, rgba(10,14,23,.92) 0%, rgba(10,14,23,.7) 34%, rgba(10,14,23,0) 60%), linear-gradient(180deg, rgba(10,14,23,.5), transparent 25%, transparent 70%, rgba(10,14,23,.85)); }
-.tl-hero__top { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: center; height: var(--header-h); padding: 0 var(--space-6); }
+.tl-hero__top { position: relative; z-index: 2; display: flex; justify-content: flex-end; align-items: center; height: var(--space-8); padding: 0 var(--space-6); }
 .tl-hero__top img { height: 26px; }
-.tl-hero__body { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: center; gap: var(--space-6); padding: var(--space-6) var(--space-7) var(--space-10); min-height: 520px; }
+.tl-hero__body { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: center; gap: var(--space-6); padding: var(--space-7) var(--space-7) var(--space-10); min-height: 560px; }
 .tl-hero__copy { display: flex; flex-direction: column; gap: var(--space-5); animation: tl-rise var(--dur-epic) var(--ease-out) both; }
 .tl-hero__title { margin: 0; font: 900 clamp(64px, 9vw, 150px)/.84 var(--font-display); letter-spacing: -.01em; text-transform: uppercase; text-wrap: balance; max-width: 9ch; }
 .tl-hero__title em { font-style: normal; color: var(--ember); text-shadow: 0 0 28px rgba(255,180,94,.45); }
@@ -238,7 +238,7 @@ textarea.tl-input { height: auto; min-height: 120px; padding: var(--space-3) var
 .tl-hero__foot { position: absolute; z-index: 2; left: var(--space-6); right: var(--space-6); bottom: var(--space-5); display: flex; justify-content: space-between; align-items: flex-end; gap: var(--space-4); pointer-events: none; }
 .tl-hero__foot > * { pointer-events: auto; }
 .tl-hero__marker { position: absolute; left: 0; top: 46%; width: 4px; height: 72px; border-radius: 0 4px 4px 0; background: var(--jade); box-shadow: 0 0 18px rgba(79,220,182,.8); z-index: 2; }
-.tl-hero__hint { position: absolute; z-index: 2; right: var(--space-6); top: calc(var(--header-h) + var(--space-3)); display: inline-flex; align-items: center; gap: var(--space-2); font: 500 12px/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--bone-faint); }
+.tl-hero__hint { position: absolute; z-index: 2; right: var(--space-6); top: var(--space-5); display: inline-flex; align-items: center; gap: var(--space-2); font: 500 12px/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--bone-faint); }
 @media (max-width: 900px) {
   .tl-hero { min-height: 0; border-radius: var(--radius-l); }
   .tl-hero__shade { background: linear-gradient(180deg, rgba(10,14,23,.3), transparent 20%, transparent 48%, rgba(10,14,23,.92) 72%); }
@@ -530,7 +530,7 @@ window.TL_HERO = {
     jumpAt: [5],
     hopAt: -1,
     speed: 1.5,
-    camera: { position: [0.5, 4.8, 13.4], target: [0, 0.3, 0], fov: 32 }
+    camera: { position: [0.4, 4.1, 9.6], target: [0, 0.2, 0], fov: 32 }
   }
 };
 
@@ -1060,7 +1060,7 @@ window.TerraLoreRealm = window.TerraLoreRealm || {};
       R.setSize(w, h, false); cam.aspect = w / h;
       var wide = cam.aspect > 1.2;
       // desktop: island sits in the right 55%; phone: centred, camera pulled back
-      layout.shift = wide ? Math.min(3.6, w / 400) : 0;
+      layout.shift = wide ? Math.min(4.6, w / 320) : 0;
       layout.dist = wide ? 1 : Math.max(1.25, 0.72 / cam.aspect);
       layout.lift = wide ? 0 : 3.5;
       cam.updateProjectionMatrix();
@@ -1088,7 +1088,7 @@ window.TerraLoreRealm = window.TerraLoreRealm || {};
       world.position.set(layout.shift, 0, 0);
       world.rotation.y = Math.sin(t * 0.08) * 0.04;
       cam.position.set(camPos.x + pointer.x * 0.9, camPos.y - pointer.y * 0.5, camPos.z * layout.dist);
-      cam.lookAt(camTarget.x + layout.shift * 0.55, camTarget.y - layout.lift, camTarget.z);
+      cam.lookAt(camTarget.x + layout.shift * 0.5, camTarget.y - layout.lift, camTarget.z);
       // island breathes
       if (island) { island.position.y = Math.sin(t * 0.6) * 0.06; island.rotation.z = Math.sin(t * 0.35) * 0.008; if (island.userData.lights) island.userData.lights.forEach(function (L, i) { L.intensity = 1.2 + Math.sin(t * 3 + i * 1.7) * 0.25 + Math.sin(t * 7.1 + i) * 0.12; }); }
       // actor along the path
@@ -1216,7 +1216,7 @@ window.TerraLoreRealm = window.TerraLoreRealm || {};
     var featured = NS.items.filter(function (i) { return i.drop === '002'; });
     return '<section class="tl-sky tl-hero-wrap"><div class="tl-hero" id="hero">' +
       '<div class="tl-hero__scene" id="hero-scene"><img class="tl-hero__poster" src="img/hero-poster.webp" alt="" width="1600" height="900"></div><div class="tl-hero__shade"></div><span class="tl-hero__marker" aria-hidden="true"></span>' +
-      '<div class="tl-hero__top"><img src="' + NS.asset('logo-wordmark-reverse') + '" alt="Terra &amp; Lore"><span class="tl-hero__hint" id="hero-hint">' + icon('sparkle') + ' Click the cat</span></div>' +
+      '<div class="tl-hero__top"><span class="tl-hero__hint" id="hero-hint">' + icon('sparkle') + ' Click the cat</span></div>' +
       '<div class="tl-hero__body"><div class="tl-hero__copy"><span class="tl-eyebrow">Drop 002 · Lore from earth</span><h1 class="tl-hero__title">Your own <em>legend</em>, rolled in clay</h1><div class="tl-hero__cta"><a class="tl-btn tl-btn--primary tl-btn--lg" href="#shop">Enter the shop ' + key('↵') + '</a><p class="tl-hero__lead">Handmade clay figures and charms from Tbilisi. Each one is numbered and leaves the kiln with its own story card.</p></div><div id="hero-dialog"></div></div><div></div></div>' +
       '<div class="tl-hero__foot">' + NS.scrollBadge() + '<div class="tl-timer" aria-label="Next drop countdown"><span class="tl-eyebrow">Next drop · 003 · Winter lore</span><div class="tl-timer__digits" id="drop-timer">' + ['d', 'h', 'm', 's'].map(function (u, i) { return (i ? '<span class="tl-timer__sep">:</span>' : '') + '<span class="tl-timer__unit"><span data-unit="' + u + '">00</span><small>' + { d: 'days', h: 'hrs', m: 'min', s: 'sec' }[u] + '</small></span>'; }).join('') + '</div></div></div>' +
       '</div></section>' +

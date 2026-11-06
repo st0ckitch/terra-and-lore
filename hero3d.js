@@ -262,7 +262,7 @@
       R.setSize(w, h, false); cam.aspect = w / h;
       var wide = cam.aspect > 1.2;
       // desktop: island sits in the right 55%; phone: centred, camera pulled back
-      layout.shift = wide ? Math.min(3.6, w / 400) : 0;
+      layout.shift = wide ? Math.min(4.6, w / 320) : 0;
       layout.dist = wide ? 1 : Math.max(1.25, 0.72 / cam.aspect);
       layout.lift = wide ? 0 : 3.5;
       cam.updateProjectionMatrix();
@@ -290,7 +290,7 @@
       world.position.set(layout.shift, 0, 0);
       world.rotation.y = Math.sin(t * 0.08) * 0.04;
       cam.position.set(camPos.x + pointer.x * 0.9, camPos.y - pointer.y * 0.5, camPos.z * layout.dist);
-      cam.lookAt(camTarget.x + layout.shift * 0.55, camTarget.y - layout.lift, camTarget.z);
+      cam.lookAt(camTarget.x + layout.shift * 0.5, camTarget.y - layout.lift, camTarget.z);
       // island breathes
       if (island) { island.position.y = Math.sin(t * 0.6) * 0.06; island.rotation.z = Math.sin(t * 0.35) * 0.008; if (island.userData.lights) island.userData.lights.forEach(function (L, i) { L.intensity = 1.2 + Math.sin(t * 3 + i * 1.7) * 0.25 + Math.sin(t * 7.1 + i) * 0.12; }); }
       // actor along the path
